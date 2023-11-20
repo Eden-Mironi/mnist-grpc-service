@@ -1,0 +1,17 @@
+# Use a base image with a more advanced version of Python
+FROM python:3.9-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the necessary files into the container
+COPY mnist_service.proto .
+COPY mnist_service_pb2.py .
+COPY mnist_service_pb2_grpc.py .
+COPY mnist_service_client.py .
+
+# Install gRPC dependencies
+RUN pip install grpcio
+
+# Command to run the client
+CMD ["python", "mnist_service_client.py"]
